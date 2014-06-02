@@ -1,0 +1,49 @@
+doctype html
+html 
+  include header
+body.container
+  .alert-anchor
+    div(class=['alert-danger', 'alert'] style="display:none")
+      button.close(type="button" aria-hidden="true") &times;
+      strong Error!
+      span.message
+  h1 BookTools
+  p.lead Welcome to BookTools!
+    .view#edit-bundle-view
+      h2 Edit Bundle
+      p
+        a.view-nav(href="/") &larr; back to bundle list
+      .bundle-books
+        ul.list-group#results
+          if(bundle)
+            h3= "Books in the bundle [" + bundle.name + "]"
+            each val, index in bundle.books
+              li.list-group-item
+                p=index
+                p=val
+          else
+            li.list-group-item Bundle not here! There seems to be a problem with our server.
+        
+      h3 Add a Book
+      form.form(class=["find-book","by-title"] role="form")
+        input(type="hidden" name="field" value="subject")
+        div.form-group
+          label(for="author-search") by Title
+          input.search#title-search(type="text" class="form-control")
+          button.btn(type="submit")
+            abbr.glyphicon(title="Search by Title" class="glyphicon-search")
+            span Search by Title
+        //-
+          form.form(class=["find-book","by-author"] role="form")
+            input(type="hidden" name="field" value="subject")
+            div.form-group
+              label(for="author-search") by Author
+              input.search#author-search(type="text" class="form-control")
+              button.btn(type="submit")
+                abbr.glyphicon(title="Search by Author" class="glyphicon-search")
+                span Search by Author
+      .book-results
+        h3 -Search Results-
+        ul.list-group#results
+  include scripts
+ script(src="static/bundly.js")

@@ -1,0 +1,55 @@
+doctype html
+html 
+  include header
+body.container
+  .alert-anchor
+    div(class=['alert-danger', 'alert'] style="display:none")
+      button.close(type="button" aria-hidden="true") &times;
+      strong Error!
+      span.message
+  h1 BookTools
+  p.lead Welcome to BookTools!
+  .view#welcome-view
+    p BookTools is an application for creating book bundles—collections of free ebooks.
+    p
+      a.btn(class="btn-primary" href="/auth/google") Google Login
+  .view#list-bundles-view
+    h2 Your Bundles
+    p.logout
+      a.btn(class="btn btn-primary" href="/auth/logout") Logout
+    .bundles
+    #new-bundle
+      h3 Create a New Book Bundle
+      form.new-bundle-form(class="form-inline" role="form")
+        div.form-group
+          label(for="new-bundle-name") Bundle Name
+          input#new-bundle-name(type="text" class="form-control" placeholder="Bundle Name")
+          button.btn(type="submit" class="btn-primary")
+            abbr.glyphicon(title="create a bundle" class="glyphicon-plus")
+              span create a bundle
+  .view#edit-bundle-view
+    h2 Edit Bundle
+    p
+      a.view-nav(href="#list-bundles")&larr; back to bundle list
+    p Books in the Current Bundle
+    .bundle-books
+    h3 Add a Book
+    form.form(class=["find-book","by-title"] role="form")
+      input(type="hidden" name="field" value="subject")
+      div.form-group
+        label(for="author-search") by Title
+        input.search#title-search(type="text" class="form-control")
+        button.btn(type="submit")
+          abbr.glyphicon(title="Search by Title" class="glyphicon-search")
+          span Search by Title
+    form.form(class=["find-book","by-author"] role="form")
+      input(type="hidden" name="field" value="subject")
+      div.form-group
+        label(for="author-search") by Author
+        input.search#author-search(type="text" class="form-control")
+        button.btn(type="submit")
+          abbr.glyphicon(title="Search by Author" class="glyphicon-search")
+          span Search by Author
+    .book-results
+  include scripts
+  script(src="static/custom.js")
